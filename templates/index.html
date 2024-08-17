@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Suggestions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Generate Email Suggestions</h1>
+        <form method="POST" action="/generate">
+            <input type="text" name="name" placeholder="Enter your name" required>
+            <button type="submit">Generate Emails</button>
+        </form>
+
+        {% if suggestions %}
+        <h2>Email Suggestions:</h2>
+        <button id="copyButton" onclick="copyEmails()">Copy All Emails</button> <!-- زر النسخ بلون مختلف -->
+        <ul id="emailList">
+            {% for email in suggestions %}
+            <li>{{ email }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+    <script>
+        function copyEmails() {
+            const emailList = document.getElementById('emailList');
+            const emails = Array.from(emailList.querySelectorAll('li')).map(li => li.textContent).join('\n');
+            const tempTextarea = document.createElement('textarea');
+            tempTextarea.value = emails;
+            document.body.appendChild(tempTextarea);
+            tempTextarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextarea);
+            alert('Emails copied to clipboard!');
+        }
+    </script>
+</body>
+</html>
