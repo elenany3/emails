@@ -4,7 +4,7 @@ import random
 app = Flask(__name__)
 
 # قائمة الدومينات
-domains = ['viajemail.com', 'postacasa.com', 'kuchenmail.com', 'boscomail.com','cielomail.com','cielomail.com']
+domains = ['viajemail.com', 'postacasa.com', 'kuchenmail.com', 'boscomail.com']
 
 @app.route('/')
 def index():
